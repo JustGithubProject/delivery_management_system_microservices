@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  authentication_service:
+    build: ./authentication_service
+    ports:
+      - "8001:8001"
+    depends_on:
+      - authentication_database
+    env_file: ./authentication_service/.env
+
+  orders_service:
+    build: ./orders_service
+    ports:
+      - "8002:8002"
+    depends_on:
+      - orders_database
+    env_file: ./orders_service/.env
+
+  warehouses_service:
+    build: ./warehouses_service
+    ports:
+      - "8003:8003"
+    depends_on:
+      - warehouses_database
+    env_file: ./warehouses_service/.env
+
+  delivery_service:
+    build: ./delivery_service
+    ports:
+      - "8004:8004"
+    depends_on:
+      - delivery_database
+    env_file: ./delivery_service/.env
+
+  authentication_database:
+    image: postgres:latest
+    ports:
+      - "5431:5432"
+    env_file: ./authentication_service/.env_db
+
+  orders_database:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    env_file: ./orders_service/.env_db
+
+  warehouses_database:
+    image: postgres:latest
+    ports:
+      - "5433:5432"
+    env_file: ./warehouses_service/.env_db
+
+  delivery_database:
+    image: postgres:latest
+    ports:
+      - "5434:5432"
+    env_file: ./delivery_service/.env_db
