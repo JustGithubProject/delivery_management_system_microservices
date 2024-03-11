@@ -1,3 +1,15 @@
 venv/
 .idea
 __pycache__/
+.env
+delivery_management_system/authentication_service/.env
+delivery_management_system/authentication_service/.env_db
+delivery_management_system/delivery_service/.env
+delivery_management_system/delivery_service/.env_db
+delivery_management_system/orders_service/.env
+delivery_management_system/orders_service/.env_db
+delivery_management_system/warehouses_service/.env
+delivery_management_system/warehouses_service/.env_db
+
+
+
