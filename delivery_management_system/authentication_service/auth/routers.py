@@ -13,5 +13,14 @@ from authentication_service.auth.utils import (
     verify_password
 )
 
+from schemas import (
+    UserOut,
+    UserAuth
+)
+
 
 user_router = APIRouter()
+
+@user_router.post("/signup", summary="Create new user", response_model=UserOut)
+def create_user_handler(data: UserAuth):
+    user =

@@ -1,4 +1,4 @@
-from authentication_service.models.models import User
+from authentication_service.auth.models import User
 from authentication_service.database.database import Session
 from authentication_service.auth.utils import get_hashed_password
 
@@ -21,7 +21,13 @@ class UserRepository:
         self.session.add(new_user)
         self.session.commit()
 
+    def get_user_by_email(self, email: str):
+        user = self.session.query(User).filter_by(email=email).first()
+        return user
 
+
+
+user_repository = UserRepository()
 
 
 
