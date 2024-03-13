@@ -25,6 +25,9 @@ class UserRepository:
         user = self.session.query(User).filter_by(email=email).first()
         return user
 
+    def get_user_by_username(self, username: str):
+        user = self.session.query(User).filter_by(username=username).first()
+        return user
 
 
 user_repository = UserRepository()
