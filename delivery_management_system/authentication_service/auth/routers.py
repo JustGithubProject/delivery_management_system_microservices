@@ -13,19 +13,19 @@ from fastapi.security import (
 
 from fastapi.responses import RedirectResponse
 
-from authentication_service.auth.utils import (
+from auth.utils import (
     get_hashed_password,
     create_access_token,
     create_refresh_token,
     verify_password
 )
 
-from schemas import (
+from auth.schemas import (
     UserOut,
     UserAuth
 )
 
-from authentication_service.repository.user_repository import user_repository
+from repository.user_repository import user_repository
 
 
 # Logger setup
@@ -62,7 +62,7 @@ def create_user_handler(data: UserAuth):
         )
         logger.info(f"User created successfully: {data.username}")
     except Exception as ex:
-        logger.error(f"Failed to create a new user: {ex}")
+        logger.error(f"Failed to create a new user: {ex}", exc_info=True)
         return f"{ex}: failure to create new user"
 
 

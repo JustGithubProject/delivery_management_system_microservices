@@ -4,7 +4,7 @@ from sqlalchemy.orm import (
     sessionmaker
 )
 
-from authentication_service.config import (
+from config import (
     AUTH_DB_USER,
     AUTH_DB_PASS,
     AUTH_DB_NAME,

@@ -10,13 +10,13 @@ from datetime import (
 
 from passlib.context import CryptContext
 
-from constants import (
+from auth.constants import (
     ACCESS_TOKEN_EXPIRE_MINUTES,
     REFRESH_TOKEN_EXPIRE_MINUTES,
     ALGORITHM
 )
 
-from authentication_service.config import (
+from config import (
     JWT_SECRET_KEY,
     JWT_REFRESH_SECRET_KEY
 )
