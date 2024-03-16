@@ -46,7 +46,7 @@ def create_user_handler(data: UserAuth):
     # Get user by email
     user = user_repository.get_user_by_email(data.email)
 
-    # If the user exists raise an HTTPException
+    # If the user exists raise HTTPException
     if user:
         logger.warning(f"Attempted to create a user with an email that already exists: {data.email}")
         raise HTTPException(

@@ -22,8 +22,8 @@ class WareHouseRepository:
         self.session.add(new_warehouse)
         self.session.commit()
 
-    def get_warehouse_by_id(self, warehouse_id: int):
-        warehouse = self.session.query(WareHouse).filter_by(id=warehouse_id).first()
+    def get_warehouse_by_name(self, name: str):
+        warehouse = self.session.query(WareHouse).filter_by(name=name).first()
         return warehouse
 
 
