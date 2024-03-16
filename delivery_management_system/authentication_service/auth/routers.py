@@ -40,7 +40,7 @@ logger = logging.getLogger(__name__)
 user_router = APIRouter()
 
 
-@user_router.post("/signup", summary="Create new user", response_model=UserOut)
+@user_router.post("/auth/signup", summary="Create new user", response_model=UserOut)
 def create_user_handler(data: UserAuth):
 
     # Get user by email
@@ -66,7 +66,7 @@ def create_user_handler(data: UserAuth):
         return f"{ex}: failure to create new user"
 
 
-@user_router.post("/login", summary="Create access and refresh tokens for user")
+@user_router.post("/auth/login", summary="Create access and refresh tokens for user")
 def login_handler(form_data: OAuth2PasswordRequestForm = Depends()):
     logger.info(f"Login attempt with username: {form_data.username}")
 
