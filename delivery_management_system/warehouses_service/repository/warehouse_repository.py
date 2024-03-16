@@ -30,5 +30,9 @@ class WareHouseRepository:
         warehouse = self.session.query(WareHouse).filter_by(id=warehouse_id).first()
         return warehouse
 
+    def get_warehouses_list(self):
+        warehouses = self.session.query(WareHouse).all()
+        return warehouses
+
 
 warehouse_repository = WareHouseRepository()

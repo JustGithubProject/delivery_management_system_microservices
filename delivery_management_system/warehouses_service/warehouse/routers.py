@@ -62,12 +62,17 @@ def create_warehouse_handler(data: WareHouseCreate):
 @warehouse_router.get("/warehouse/{warehouse_id}")
 def get_warehouse_by_id_handler(warehouse_id: int):
     try:
+        # Get warehouse by id that passed from path parameters
         warehouse = warehouse_repository.get_warehouse_by_id(warehouse_id)
+        logger.info("Operation was successfully completed")
     except Exception as ex:
         logger.error(f"{ex}: the warehouse with this ID could not be found", exc_info=True)
         return f"{ex}: Warehouse with this id does not exist"
+
     return {"warehouse": warehouse}
 
 
-
-
+@warehouse_router.get("/warehouse/list/")
+def get_list_warehouses_handler():
+    warehouses = warehouse_repository.get_warehouses_list()
+    return warehouses
