@@ -7,6 +7,10 @@ from fastapi import (
     status
 )
 
+from warehouses_service.warehouse.custom_exceptions import (
+    DeleteWareHouseException,
+)
+
 from warehouses_service.warehouse.schemas import (
     WareHouseCreate,
     WareHouseRead
@@ -76,3 +80,12 @@ def get_warehouse_by_id_handler(warehouse_id: int):
 def get_list_warehouses_handler():
     warehouses = warehouse_repository.get_warehouses_list()
     return warehouses
+
+
+@warehouse_router.delete("/warehouse/delete/{warehouse_id}")
+def delete_warehouse_handler(warehouse_id: int):
+    try:
+        warehouse_repository.delete_warehouse(warehouse_id)
+    except DeleteWareHouseException:
+        logger.error("Failed to delete warehouse")
+        return "Failed to delete warehouse"

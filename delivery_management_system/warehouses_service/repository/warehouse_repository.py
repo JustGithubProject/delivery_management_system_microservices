@@ -1,5 +1,8 @@
 from warehouses_service.database.database import Session
 from warehouses_service.warehouse.models import WareHouse
+from warehouses_service.warehouse.custom_exceptions import (
+    DeleteWareHouseException
+)
 
 
 class WareHouseRepository:
@@ -33,6 +36,13 @@ class WareHouseRepository:
     def get_warehouses_list(self):
         warehouses = self.session.query(WareHouse).all()
         return warehouses
+
+    def delete_warehouse(self, warehouse_id: int):
+        try:
+            warehouse = self.get_warehouse_by_id(warehouse_id)
+            self.session.delete(warehouse)
+        except Exception:
+            raise DeleteWareHouseException()
 
 
 warehouse_repository = WareHouseRepository()
