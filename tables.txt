@@ -1,0 +1,14 @@
+authentication_service:
+Таблица пользователей (id, username, password_hash, email и т.д.)
+Таблица сессий (id, user_id, token, expires_at и т.д.)
+
+delivery_service:
+Таблица заказов доставки (id, order_id, delivery_address, status и т.д.)
+
+orders_service:
+Таблица заказов (id, user_id, status и т.д.)
+Таблица товаров в заказах (id, order_id, product_id, quantity и т.д.)
+
+warehouses_service:
+Таблица складов (id, name, location и т.д.)
+Таблица товаров на складах (id, warehouse_id, product_id, quantity и т.д.)

@@ -19,6 +19,10 @@ from sqlalchemy.orm import (
 
 )
 
+from authentication_service.auth.utils import (
+    get_default_expires_at
+)
+
 
 class Base(DeclarativeBase):
     pass
@@ -31,14 +35,16 @@ class User(Base):
     username: Mapped[str] = mapped_column(String(50))
     email: Mapped[str]
     password_hash: Mapped[str]
-    sessions: Mapped[List["Session"]] = relationship(back_populates="user")
+    sessions: Mapped[List["Session"]] = relationship(back_populates="user", uselist=True)
 
 
 class Session(Base):
+    __tablename__ = "sessions"
+
     id: Mapped[int] = mapped_column(primary_key=True)
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
     token: Mapped[str] = mapped_column(String, nullable=False)
-    expires_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow() + timedelta(minutes=30))
-    user: Mapped["User"] = relationship(back_populates="sessions")
+    expires_at: Mapped[datetime] = mapped_column(DateTime, default=get_default_expires_at)
+    user: Mapped["User"] = relationship(back_populates="sessions", uselist=False)
 
 

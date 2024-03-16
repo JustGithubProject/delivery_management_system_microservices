@@ -13,19 +13,19 @@ from fastapi.security import (
 
 from fastapi.responses import RedirectResponse
 
-from auth.utils import (
+from authentication_service.auth.utils import (
     get_hashed_password,
     create_access_token,
     create_refresh_token,
     verify_password
 )
 
-from auth.schemas import (
+from authentication_service.auth.schemas import (
     UserOut,
     UserAuth
 )
 
-from repository.user_repository import user_repository
+from authentication_service.repository.user_repository import user_repository
 
 
 # Logger setup

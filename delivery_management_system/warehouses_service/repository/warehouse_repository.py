@@ -1,4 +1,5 @@
-from database.database import Session
+from warehouses_service.database.database import Session
+from warehouses_service.warehouse.models import WareHouse
 
 
 class WareHouseRepository:
@@ -9,6 +10,21 @@ class WareHouseRepository:
         self,
         name,
         location,
+        product_name,
         quantity
     ):
-        ...
+        new_warehouse = WareHouse(
+            name=name,
+            location=location,
+            product_name=product_name,
+            quantity=quantity
+        )
+        self.session.add(new_warehouse)
+        self.session.commit()
+
+    def get_warehouse_by_id(self, warehouse_id: int):
+        warehouse = self.session.query(WareHouse).filter_by(id=warehouse_id).first()
+        return warehouse
+
+
+warehouse_repository = WareHouseRepository()

@@ -1,6 +1,6 @@
-from auth.models import User
-from database.database import Session
-from auth.utils import get_hashed_password
+from authentication_service.auth.models import User
+from authentication_service.database.database import Session
+from authentication_service.auth.utils import get_hashed_password
 
 
 class UserRepository:

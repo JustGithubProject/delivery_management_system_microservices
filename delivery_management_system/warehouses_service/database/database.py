@@ -4,7 +4,7 @@ from sqlalchemy.orm import (
     sessionmaker
 )
 
-from config import (
+from warehouses_service.config import (
     WAREHOUSE_DB_USER,
     WAREHOUSE_DB_PASS,
     WAREHOUSE_DB_NAME,

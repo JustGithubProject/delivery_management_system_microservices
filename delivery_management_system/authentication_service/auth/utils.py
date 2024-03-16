@@ -10,13 +10,13 @@ from datetime import (
 
 from passlib.context import CryptContext
 
-from auth.constants import (
+from authentication_service.auth.constants import (
     ACCESS_TOKEN_EXPIRE_MINUTES,
     REFRESH_TOKEN_EXPIRE_MINUTES,
     ALGORITHM
 )
 
-from config import (
+from authentication_service.config import (
     JWT_SECRET_KEY,
     JWT_REFRESH_SECRET_KEY
 )
@@ -61,3 +61,7 @@ def create_refresh_token(subject: Union[str, Any], expires_delta: int = None) ->
     to_encode = {"exp": expires_delta, "sub": str(subject)}
     encoded_jwt = jwt.encode(to_encode, JWT_REFRESH_SECRET_KEY, ALGORITHM)
     return encoded_jwt
+
+
+def get_default_expires_at():
+    return datetime.utcnow() + timedelta(minutes=30)

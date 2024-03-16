@@ -21,3 +21,5 @@ load_dotenv(dotenv_path=env_file_path)
 
 JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY')   # should be kept secret
 JWT_REFRESH_SECRET_KEY = os.getenv('JWT_REFRESH_SECRET_KEY')   # should be kept secret
+
+
