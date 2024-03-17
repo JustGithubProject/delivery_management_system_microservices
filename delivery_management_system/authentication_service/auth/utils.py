@@ -1,3 +1,5 @@
+import uuid
+
 from typing import (
     Union,
     Any
@@ -65,3 +67,8 @@ def create_refresh_token(subject: Union[str, Any], expires_delta: int = None) ->
 
 def get_default_expires_at():
     return datetime.utcnow() + timedelta(minutes=30)
+
+
+def generate_uuid():
+    """This function will be used instead of a prime number"""
+    return str(uuid.uuid4())

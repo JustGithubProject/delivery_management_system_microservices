@@ -20,7 +20,8 @@ from sqlalchemy.orm import (
 )
 
 from authentication_service.auth.utils import (
-    get_default_expires_at
+    get_default_expires_at,
+    generate_uuid
 )
 
 
@@ -31,7 +32,7 @@ class Base(DeclarativeBase):
 class User(Base):
     __tablename__ = "users"
 
-    id: Mapped[int] = mapped_column(primary_key=True)
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=generate_uuid)
     username: Mapped[str] = mapped_column(String(50))
     email: Mapped[str]
     password_hash: Mapped[str]
