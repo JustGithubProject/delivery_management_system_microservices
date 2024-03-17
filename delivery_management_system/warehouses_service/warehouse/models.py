@@ -30,6 +30,7 @@ class Product(Base):
     id: Mapped[str] = mapped_column(String(36), primary_key=True, default=generate_uuid)
     product_name: Mapped[str] = mapped_column(String)
     price: Mapped[float] = mapped_column(Numeric(10, 2))
+    warehouses: Mapped[List["WareHouse"]] = relationship(back_populates="product", uselist=True)
 
 
 class WareHouse(Base):
@@ -38,5 +39,6 @@ class WareHouse(Base):
     id: Mapped[str] = mapped_column(String(36), primary_key=True, default=generate_uuid)
     name: Mapped[str] = mapped_column(String(50))
     location: Mapped[str] = mapped_column(String(100))
-    product_id: Mapped[str] = mapped_column(String(100))
+    product_id: Mapped[str] = mapped_column(ForeignKey("product.id"))
     quantity: Mapped[int] = mapped_column(default=0)
+    product: Mapped["Product"] = relationship(back_populates="warehouses", uselist=False)
