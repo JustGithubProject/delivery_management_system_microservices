@@ -27,6 +27,10 @@ from authentication_service.auth.schemas import (
 
 from authentication_service.repository.user_repository import user_repository
 
+from authentication_service.messaging.producer import (
+    ProducerAuthorization
+)
+
 
 # Logger setup
 logging.basicConfig(
@@ -92,6 +96,9 @@ def login_handler(form_data: OAuth2PasswordRequestForm = Depends()):
     # Create access and refresh token using email
     access_token = create_access_token(user.email)
     refresh_token = create_refresh_token(user.email)
+
+    with ProducerAuthorization() as producer_auth:
+        producer_auth.send_user_token_to_services(access_token)
 
     logger.info(f"User '{form_data.username}' successfully logged in.")
 
