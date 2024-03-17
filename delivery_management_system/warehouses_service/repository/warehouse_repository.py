@@ -1,7 +1,8 @@
 from warehouses_service.database.database import Session
 from warehouses_service.warehouse.models import WareHouse
 from warehouses_service.warehouse.custom_exceptions import (
-    DeleteWareHouseException
+    DeleteWareHouseException,
+    CreateWarehouseException
 )
 
 
@@ -16,14 +17,17 @@ class WareHouseRepository:
         product_name,
         quantity
     ):
-        new_warehouse = WareHouse(
-            name=name,
-            location=location,
-            product_name=product_name,
-            quantity=quantity
-        )
-        self.session.add(new_warehouse)
-        self.session.commit()
+        try:
+            new_warehouse = WareHouse(
+                name=name,
+                location=location,
+                product_name=product_name,
+                quantity=quantity
+            )
+            self.session.add(new_warehouse)
+            self.session.commit()
+        except Exception:
+            raise CreateWarehouseException()
 
     def get_warehouse_by_name(self, name: str):
         warehouse = self.session.query(WareHouse).filter_by(name=name).first()

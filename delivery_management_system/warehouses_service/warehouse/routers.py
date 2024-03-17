@@ -9,6 +9,7 @@ from fastapi import (
 
 from warehouses_service.warehouse.custom_exceptions import (
     DeleteWareHouseException,
+    CreateWarehouseException,
 )
 
 from warehouses_service.warehouse.schemas import (
@@ -69,9 +70,9 @@ def get_warehouse_by_id_handler(warehouse_id: int):
         # Get warehouse by id that passed from path parameters
         warehouse = warehouse_repository.get_warehouse_by_id(warehouse_id)
         logger.info("Operation was successfully completed")
-    except Exception as ex:
-        logger.error(f"{ex}: the warehouse with this ID could not be found", exc_info=True)
-        return f"{ex}: Warehouse with this id does not exist"
+    except CreateWarehouseException:
+        logger.error(f"the warehouse with this ID could not be found", exc_info=True)
+        return f"Warehouse with this id does not exist"
 
     return {"warehouse": warehouse}
 
