@@ -25,6 +25,8 @@ class Base(DeclarativeBase):
 
 
 class Product(Base):
+    __tablename__ = "products"
+
     id: Mapped[str] = mapped_column(String(36), primary_key=True, default=generate_uuid)
     product_name: Mapped[str] = mapped_column(String)
     price: Mapped[float] = mapped_column(Numeric(10, 2))
