@@ -30,7 +30,7 @@ class Base(DeclarativeBase):
 
 
 class Order(Base):
-    __tablename__ = "orders"
+    __tablename__ = "order"
 
     id: Mapped[str] = mapped_column(String(36), primary_key=True, default=generate_uuid)
     user_id: Mapped[str] = mapped_column(String(36))
@@ -42,7 +42,7 @@ class OrderItem(Base):
     __tablename__ = "order_item"
 
     id: Mapped[str] = mapped_column(String(36), primary_key=True, default=generate_uuid)
-    order_id: Mapped[str] = mapped_column(ForeignKey("orders.id"))
+    order_id: Mapped[str] = mapped_column(ForeignKey("order.id"))
     product_id: Mapped[str] = mapped_column(String(36))
     quantity: Mapped[int] = mapped_column(Integer, default=0)
     order: Mapped["Order"] = relationship(back_populates="orders_item", uselist=False)

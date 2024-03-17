@@ -25,7 +25,7 @@ class Base(DeclarativeBase):
 
 
 class Product(Base):
-    __tablename__ = "products"
+    __tablename__ = "product"
 
     id: Mapped[str] = mapped_column(String(36), primary_key=True, default=generate_uuid)
     product_name: Mapped[str] = mapped_column(String)
@@ -33,7 +33,7 @@ class Product(Base):
 
 
 class WareHouse(Base):
-    __tablename__ = "warehouses"
+    __tablename__ = "warehouse"
 
     id: Mapped[str] = mapped_column(String(36), primary_key=True, default=generate_uuid)
     name: Mapped[str] = mapped_column(String(50))

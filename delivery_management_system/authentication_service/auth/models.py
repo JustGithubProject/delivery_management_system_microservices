@@ -30,7 +30,7 @@ class Base(DeclarativeBase):
 
 
 class User(Base):
-    __tablename__ = "users"
+    __tablename__ = "user"
 
     id: Mapped[str] = mapped_column(String(36), primary_key=True, default=generate_uuid)
     username: Mapped[str] = mapped_column(String(50))
@@ -40,10 +40,10 @@ class User(Base):
 
 
 class Session(Base):
-    __tablename__ = "sessions"
+    __tablename__ = "session"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
+    user_id: Mapped[int] = mapped_column(ForeignKey("user.id"))
     token: Mapped[str] = mapped_column(String, nullable=False)
     expires_at: Mapped[datetime] = mapped_column(DateTime, default=get_default_expires_at)
     user: Mapped["User"] = relationship(back_populates="sessions", uselist=False)

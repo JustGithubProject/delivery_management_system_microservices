@@ -26,6 +26,8 @@ class Base(DeclarativeBase):
 
 
 class DeliveryOrder(Base):
+    __tablename__ = "delivery_order"
+
     id: Mapped[str] = mapped_column(String(36), primary_key=True, default=generate_uuid)
     order_id: Mapped[str] = mapped_column(String(36))
     delivery_address: Mapped[str] = mapped_column(String)
