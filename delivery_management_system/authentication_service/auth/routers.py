@@ -98,7 +98,7 @@ def login_handler(form_data: OAuth2PasswordRequestForm = Depends()):
     refresh_token = create_refresh_token(user.email)
 
     with ProducerAuthorization() as producer_auth:
-        producer_auth.send_user_token_to_services(access_token)
+        producer_auth.send_user_object_and_token_to_services(access_token, user)
 
     logger.info(f"User '{form_data.username}' successfully logged in.")
 
