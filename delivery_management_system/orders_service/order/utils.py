@@ -80,7 +80,7 @@ def get_current_user(token: str = Depends(reusable_oauth)) -> SystemUser:
         )
 
     with ConsumerAuthorization() as consumer_auth:
-        token_2, user = consumer_auth.receive_user_obj_and_token_from_auth_service()
+        _, user = consumer_auth.receive_user_obj_and_token_from_auth_service()
 
     if user is None:
         raise HTTPException(
