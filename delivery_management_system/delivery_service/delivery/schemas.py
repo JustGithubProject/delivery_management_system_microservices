@@ -14,3 +14,8 @@ class SystemUser(BaseModel):
 class TokenPayload(BaseModel):
     sub: str
     exp: int
+
+
+class DeliveryOrderCreate(BaseModel):
+    order_id: str
+    delivery_address: str

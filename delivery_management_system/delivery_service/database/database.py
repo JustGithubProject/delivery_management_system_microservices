@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from config import (
+from delivery_service.config import (
     DELIVERY_DB_USER,
     DELIVERY_DB_PASS,
     DELIVERY_DB_NAME,
@@ -9,4 +9,9 @@ from config import (
     DELIVERY_DB_HOST
 )
 
-print(DELIVERY_DB_NAME)
+
+engine = create_engine(
+    f"postgresql+psycopg2://{DELIVERY_DB_USER}:{DELIVERY_DB_PASS}@{DELIVERY_DB_HOST}:{DELIVERY_DB_PORT}/{DELIVERY_DB_NAME} "
+)
+
+Session = sessionmaker(engine)
