@@ -27,3 +27,13 @@ class ConsumerAuthorization:
 
     def __exit__(self):
         print("EXIT")
+
+
+class ConsumerFromOrderService:
+    def __init__(self):
+        self.connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
+        self.channel = self.connection.channel()
+        self.channel.queue_declare(queue="TEMP_NAME", durable=True)
+        print(' [*] Waiting for messages. To exit press CTRL+C')
+        self.channel.start_consuming()
+        ...
