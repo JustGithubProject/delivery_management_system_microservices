@@ -4,7 +4,8 @@ from fastapi import (
 )
 
 from delivery_service.messaging.consumer import (
-    ConsumerAuthorization
+    ConsumerAuthorization,
+    ConsumerFromOrderService
 )
 
 from delivery_service.delivery.schemas import (
@@ -36,10 +37,14 @@ def create_delivery_order_handler(
         user: SystemUser = Depends(get_current_user)
     ):
     try:
-        delivery_order_repository.create_delivery_order(
-            order_id=delivery_order.order_id,
-            delivery_address=delivery_order.delivery_address
-        )
+        with ConsumerFromOrderService() as consumer_order:
+            order = consumer_order.receive_order_object()
+
+        if order.user_id == user.id:
+            delivery_order_repository.create_delivery_order(
+                order_id=delivery_order.order_id,
+                delivery_address=delivery_order.delivery_address
+            )
     except DeliveryOrderCreateException as exception:
         return exception
 
