@@ -36,13 +36,12 @@ def create_delivery_order_handler(
         delivery_order: DeliveryOrderCreate,
         user: SystemUser = Depends(get_current_user)
     ):
+    with ConsumerFromOrderService() as consumer_order:
+        order = consumer_order.receive_order_object()
     try:
-        with ConsumerFromOrderService() as consumer_order:
-            order = consumer_order.receive_order_object()
-
         if order.user_id == user.id:
             delivery_order_repository.create_delivery_order(
-                order_id=delivery_order.order_id,
+                order_id=order.id,
                 delivery_address=delivery_order.delivery_address
             )
     except DeliveryOrderCreateException as exception:
