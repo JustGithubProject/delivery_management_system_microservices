@@ -9,7 +9,11 @@ from orders_service.order.schemas import (
 )
 
 from orders_service.messaging.consumer import (
-    ConsumerAuthorization
+    ConsumerAuthorization,
+)
+
+from orders_service.messaging.producer import (
+    ProducerOrderToDeliveryService
 )
 
 from orders_service.order.custom_exceptions import (
@@ -29,7 +33,9 @@ order_router = APIRouter()
 @order_router.post("/order/create/")
 def order_create_handler(data: OrderCreate, user: SystemUser = Depends(get_current_user)):
     try:
-        order_repository.create_order(status=data.status, user_id=user.id)
+        order = order_repository.create_order(status=data.status, user_id=user.id)
+        with ProducerOrderToDeliveryService() as producer_order:
+            producer_order.send_order_object(order)
     except OrderCreateException as exception:
         return exception
 

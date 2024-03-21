@@ -20,6 +20,8 @@ class OrderRepository:
             new_order = Order(user_id=user_id, status=status)
             self.session.add(new_order)
             self.session.commit()
+            return new_order
+
         except Exception:
             raise OrderCreateException()
 
