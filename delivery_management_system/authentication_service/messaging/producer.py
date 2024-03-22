@@ -7,7 +7,7 @@ class ProducerAuthorization:
     def __init__(self):
         self.connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
         self.channel = self.connection.channel()
-        self.channel.queue_declare(queue="TEMP_NAME", durable=True)
+        self.channel.queue_declare(queue="GET_TOKEN_AND_USER", durable=True)
 
     def send_user_object_and_token_to_services(self, token: str, user: User):
         decoded_token = token.encode()
@@ -20,7 +20,7 @@ class ProducerAuthorization:
 
         self.channel.basic_publish(
             exchange='',
-            routing_key="TEMP_NAME",
+            routing_key="GET_TOKEN_AND_USER",
             body=message_bytes,
             properties=pika.BasicProperties(
                 delivery_mode=pika.DeliveryMode.Persistent

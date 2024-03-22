@@ -7,7 +7,7 @@ class ConsumerAuthorization:
         self.json_data = None
         self.connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
         self.channel = self.connection.channel()
-        self.channel.queue_declare(queue="TEMP_NAME", durable=True)
+        self.channel.queue_declare(queue="GET_TOKEN_AND_USER", durable=True)
         print(' [*] Waiting for messages. To exit press CTRL+C')
         self.channel.start_consuming()
 
@@ -19,7 +19,7 @@ class ConsumerAuthorization:
             ch.basic_ack(delivery_tag=method.delivery_tag)
 
         self.channel.basic_qos(prefetch_count=1)
-        self.channel.basic_consume(queue='TEMP_NAME', on_message_callback=callback)
+        self.channel.basic_consume(queue='GET_TOKEN_AND_USER', on_message_callback=callback)
         return self.json_data["token"], self.json_data["user"]
 
     def __enter__(self):

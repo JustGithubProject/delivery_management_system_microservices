@@ -29,5 +29,8 @@ class DeliveryOrderRepository:
         except Exception:
             raise DeliveryOrderCreateException()
 
+    def get_delivery_by_order(self, order_id):
+        return self.session.query(DeliveryOrder).filter_by(order_id=order_id).first()
+
 
 delivery_order_repository = DeliveryOrderRepository()

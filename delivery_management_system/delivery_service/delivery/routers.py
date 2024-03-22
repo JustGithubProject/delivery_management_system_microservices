@@ -48,3 +48,16 @@ def create_delivery_order_handler(
         return exception
 
 
+@delivery_router.get("/get/user/delivery")
+def get_delivery_by_order_handler(user: SystemUser = Depends(get_current_user)):
+    with ConsumerFromOrderService() as consumer_order:
+        order = consumer_order.receive_order_object()
+    if order.user_id == user.id:
+        delivery = delivery_order_repository.get_delivery_by_order(order)
+        return delivery
+    else:
+        return []
+
+
+
+
