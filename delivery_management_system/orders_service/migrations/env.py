@@ -5,23 +5,23 @@ from sqlalchemy import pool
 
 from alembic import context
 
-from warehouses_service.config import (
-    WAREHOUSE_DB_USER,
-    WAREHOUSE_DB_PASS,
-    WAREHOUSE_DB_HOST,
-    WAREHOUSE_DB_PORT,
-    WAREHOUSE_DB_NAME
+from orders_service.config import (
+    ORDER_DB_USER,
+    ORDER_DB_PASS,
+    ORDER_DB_HOST,
+    ORDER_DB_PORT,
+    ORDER_DB_NAME
 )
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
 section = config.config_ini_section
-config.set_section_option(section, "DB_USER", WAREHOUSE_DB_USER)
-config.set_section_option(section, "DB_PASS", WAREHOUSE_DB_PASS)
-config.set_section_option(section, "DB_HOST", WAREHOUSE_DB_HOST)
-config.set_section_option(section, "DB_PORT", WAREHOUSE_DB_PORT)
-config.set_section_option(section, "DB_NAME", WAREHOUSE_DB_NAME)
+config.set_section_option(section, "DB_USER", ORDER_DB_USER)
+config.set_section_option(section, "DB_PASS", ORDER_DB_PASS)
+config.set_section_option(section, "DB_HOST", ORDER_DB_HOST)
+config.set_section_option(section, "DB_PORT", ORDER_DB_PORT)
+config.set_section_option(section, "DB_NAME", ORDER_DB_NAME)
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
 if config.config_file_name is not None:
