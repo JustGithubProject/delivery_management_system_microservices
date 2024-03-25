@@ -15,5 +15,12 @@ WAREHOUSE_DB_PORT = os.getenv("WAREHOUSE_DB_PORT")  #
 WAREHOUSE_DB_HOST = os.getenv("WAREHOUSE_DB_HOST")  #
 #####################################################
 
+env_file = ".env"
+
+load_dotenv(dotenv_path=env_file)
+
+JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY")
+JWT_REFRESH_SECRET_KEY = os.getenv("JWT_REFRESH_SECRET_KEY")
+
 
 
