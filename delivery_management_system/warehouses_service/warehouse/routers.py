@@ -14,12 +14,15 @@ from warehouses_service.warehouse.custom_exceptions import (
 
 from warehouses_service.warehouse.schemas import (
     WareHouseCreate,
-    WareHouseRead
+    WareHouseRead,
+    SystemUser
 )
 
 from warehouses_service.repository.warehouse_repository import (
     warehouse_repository
 )
+
+from warehouses_service.warehouse.utils import get_current_user
 
 
 # Logger setup
@@ -37,7 +40,7 @@ warehouse_router = APIRouter()
 
 
 @warehouse_router.post("/warehouse/create/")
-def create_warehouse_handler(data: WareHouseCreate):
+def create_warehouse_handler(data: WareHouseCreate, user: SystemUser = Depends(get_current_user)):
 
     # Get warehouse by warehouse_id
     warehouse = warehouse_repository.get_warehouse_by_name(data.name)
@@ -65,7 +68,7 @@ def create_warehouse_handler(data: WareHouseCreate):
 
 
 @warehouse_router.get("/warehouse/{warehouse_id}")
-def get_warehouse_by_id_handler(warehouse_id: int):
+def get_warehouse_by_id_handler(warehouse_id: int, user: SystemUser = Depends(get_current_user)):
     try:
         # Get warehouse by id that passed from path parameters
         warehouse = warehouse_repository.get_warehouse_by_id(warehouse_id)
@@ -78,13 +81,13 @@ def get_warehouse_by_id_handler(warehouse_id: int):
 
 
 @warehouse_router.get("/warehouse/list/")
-def get_list_warehouses_handler():
+def get_list_warehouses_handler(user: SystemUser = Depends(get_current_user)):
     warehouses = warehouse_repository.get_warehouses_list()
     return warehouses
 
 
 @warehouse_router.delete("/warehouse/delete/{warehouse_id}")
-def delete_warehouse_handler(warehouse_id: int):
+def delete_warehouse_handler(warehouse_id: int, user: SystemUser = Depends(get_current_user)):
     try:
         warehouse_repository.delete_warehouse(warehouse_id)
     except DeleteWareHouseException:
