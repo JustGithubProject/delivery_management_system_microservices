@@ -11,6 +11,15 @@ COPY . .
 
 RUN pip install -r requirements.txt
 
+RUN pip install alembic
+
+
+RUN alembic init migrations
+RUN alembic revision --autogenerate -m "initial"
+
+
+RUN alembic upgrade head
+
 EXPOSE 8004
 
 CMD ["uvicorn", "main:delivery_app", "--host", "0.0.0.0", "--port", "8004", "--reload"]
