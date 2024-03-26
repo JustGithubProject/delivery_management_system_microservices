@@ -69,3 +69,15 @@ services:
     ports:
       - "5434:5432"
     env_file: ./delivery_service/.env_db
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - authentication_service
+      - orders_service
+      - warehouses_service
+      - delivery_service
