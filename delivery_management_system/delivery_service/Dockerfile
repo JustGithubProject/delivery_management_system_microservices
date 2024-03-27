@@ -11,14 +11,9 @@ COPY . .
 
 RUN pip install -r requirements.txt
 
-RUN pip install alembic
 
+RUN python3 setup_database.py
 
-RUN alembic init migrations
-RUN alembic revision --autogenerate -m "initial"
-
-
-RUN alembic upgrade head
 
 EXPOSE 8004
 

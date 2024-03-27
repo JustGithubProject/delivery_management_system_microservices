@@ -6,6 +6,7 @@ from sqlalchemy import pool
 from alembic import context
 
 from authentication_service.auth.models import Base
+
 from authentication_service.config import (
     AUTH_DB_USER,
     AUTH_DB_PASS,

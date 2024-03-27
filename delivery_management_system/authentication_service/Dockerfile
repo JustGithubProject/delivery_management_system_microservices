@@ -10,16 +10,9 @@ WORKDIR /auth_app
 COPY . .
 
 RUN pip install -r requirements.txt
-
-RUN pip install alembic
-
-
-RUN alembic init migrations
-RUN alembic revision --autogenerate -m "initial"
-
-
-RUN alembic upgrade head
+RUN python3 setup_database.py
 
 EXPOSE 8001
+
 
 CMD ["uvicorn", "main:authentication_app", "--host", "0.0.0.0", "--port", "8001", "--reload"]
