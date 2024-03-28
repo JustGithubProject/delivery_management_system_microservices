@@ -1,4 +1,8 @@
-from orders_service.order.models import Order
+from orders_service.order.models import (
+    Order,
+    OrderItem
+)
+
 from orders_service.database.database import Session
 
 from orders_service.order.custom_exceptions import (
@@ -41,4 +45,26 @@ class OrderRepository:
             raise OrderDeleteException()
 
 
+class OrderItemRepository:
+    def __init__(self):
+        self.session = Session()
+
+    def create_order_item(
+        self,
+        order_id,
+        product_id,
+        quantity
+    ):
+        order_item = OrderItem(
+            order_id=order_id,
+            product_id=product_id,
+            quantity=quantity
+        )
+        self.session.add(order_item)
+        self.session.commit()
+        return order_item
+
+
 order_repository = OrderRepository()
+order_item_repository = OrderItemRepository()
+
