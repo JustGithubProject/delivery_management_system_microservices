@@ -7,7 +7,8 @@ from orders_service.database.database import Session
 
 from orders_service.order.custom_exceptions import (
     OrderCreateException,
-    OrderDeleteException
+    OrderDeleteException,
+    OrderItemCreateException
 )
 
 
@@ -55,14 +56,17 @@ class OrderItemRepository:
         product_id,
         quantity
     ):
-        order_item = OrderItem(
-            order_id=order_id,
-            product_id=product_id,
-            quantity=quantity
-        )
-        self.session.add(order_item)
-        self.session.commit()
-        return order_item
+        try:
+            order_item = OrderItem(
+                order_id=order_id,
+                product_id=product_id,
+                quantity=quantity
+            )
+            self.session.add(order_item)
+            self.session.commit()
+            return order_item
+        except Exception:
+            raise OrderItemCreateException()
 
 
 order_repository = OrderRepository()
