@@ -31,6 +31,10 @@ from authentication_service.messaging.producer import (
     ProducerAuthorization
 )
 
+from authentication_service.auth.custom_exceptions import (
+    UserCreateException
+)
+
 
 # Logger setup
 logging.basicConfig(
@@ -65,7 +69,7 @@ def create_user_handler(data: UserAuth):
             password=data.password
         )
         logger.info(f"User created successfully: {data.username}")
-    except Exception as ex:
+    except UserCreateException as ex:
         logger.error(f"Failed to create a new user: {ex}", exc_info=True)
         return f"{ex}: failure to create new user"
 

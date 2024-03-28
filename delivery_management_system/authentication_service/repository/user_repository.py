@@ -1,6 +1,9 @@
 from authentication_service.auth.models import User
 from authentication_service.database.database import Session
 from authentication_service.auth.utils import get_hashed_password
+from authentication_service.auth.custom_exceptions import (
+    UserCreateException
+)
 
 
 class UserRepository:
@@ -13,13 +16,16 @@ class UserRepository:
         email: str,
         password: str
     ):
-        new_user = User(
-            username=username,
-            email=email,
-            password_hash=get_hashed_password(password)
-        )
-        self.session.add(new_user)
-        self.session.commit()
+        try:
+            new_user = User(
+                username=username,
+                email=email,
+                password_hash=get_hashed_password(password)
+            )
+            self.session.add(new_user)
+            self.session.commit()
+        except Exception:
+            raise UserCreateException()
 
     def get_user_by_email(self, email: str):
         user = self.session.query(User).filter_by(email=email).first()
