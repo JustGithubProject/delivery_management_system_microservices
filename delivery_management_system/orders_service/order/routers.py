@@ -5,11 +5,13 @@ from fastapi import (
 
 from orders_service.order.schemas import (
     OrderCreate,
-    SystemUser
+    SystemUser,
+    OrderItemCreate
 )
 
 from orders_service.messaging.consumer import (
     ConsumerAuthorization,
+    ConsumerProductFromWarehouseService
 )
 
 from orders_service.messaging.producer import (
@@ -18,15 +20,18 @@ from orders_service.messaging.producer import (
 
 from orders_service.order.custom_exceptions import (
     OrderCreateException,
-    OrderDeleteException
+    OrderDeleteException,
+    OrderItemCreateException
 )
 
 from orders_service.order.utils import get_current_user
 
 from orders_service.repository.order_repository import (
-    order_repository
+    order_repository,
+    order_item_repository
 )
 
+# Router for Order model
 order_router = APIRouter()
 
 
@@ -52,6 +57,24 @@ def delete_order_handler(order_id: str, user: SystemUser = Depends(get_current_u
     except OrderDeleteException as exception:
         return exception
 
+######################################################################
+
+# Router for OrderItem model
+order_item_router = APIRouter()
+
+
+@order_item_router.post("/order-item/create/")
+def order_item_create_handler(data: OrderItemCreate, user: SystemUser = Depends(get_current_user)):
+    try:
+        with ConsumerProductFromWarehouseService() as consumer_product:
+            product_obj = consumer_product.receive_product_object_from_warehouse_service()
+            order_item_repository.create_order_item(
+                order_id=data.order_id,
+                product_id=product_obj.id,
+                quantity=data.quantity
+            )
+    except OrderItemCreateException as exception:
+        return exception
 
 
 

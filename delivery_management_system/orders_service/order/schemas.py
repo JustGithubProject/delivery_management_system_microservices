@@ -21,3 +21,10 @@ class SystemUser(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class OrderItemCreate(BaseModel):
+    order_id: str
+    # product_id: str
+    quantity: int
+
