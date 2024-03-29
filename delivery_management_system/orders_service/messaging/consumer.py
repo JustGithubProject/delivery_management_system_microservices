@@ -27,3 +27,24 @@ class ConsumerAuthorization:
 
     def __exit__(self):
         print("EXIT")
+
+
+class ConsumerProductFromWarehouseService:
+    def __init__(self):
+        self.json_data = None
+        self.connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
+        self.channel = self.connection.channel()
+        self.channel.queue_declare(queue="GET_PRODUCT", durable=True)
+        print(' [*] Waiting for messages. To exit press CTRL+C')
+        self.channel.start_consuming()
+
+    def receive_product_object_from_warehouse_service(self):
+        def callback(ch, method, properties, body):
+            message_str = body.decode()
+            self.json_data = json.loads(message_str)
+            print(f" [x] Received {self.json_data['product']}")
+            ch.basic_ack(delivery_tag=method.delivery_tag)
+
+        self.channel.basic_qos(prefetch_count=1)
+        self.channel.basic_consume(queue='GET_PRODUCT', on_message_callback=callback)
+        return self.json_data["product"]
