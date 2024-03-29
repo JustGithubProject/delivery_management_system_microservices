@@ -39,7 +39,7 @@ class ConsumerProductFromWarehouseService:
         self.channel.start_consuming()
 
     def receive_product_object_from_warehouse_service(self):
-        def callback(ch, method, properties, body):
+        def callback(ch, method, _, body):
             message_str = body.decode()
             self.json_data = json.loads(message_str)
             print(f" [x] Received {self.json_data['product']}")
