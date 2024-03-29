@@ -1,11 +1,36 @@
 import pika
+import json
+
+from warehouses_service.warehouse.models import (
+    Product
+)
 
 
-connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
-channel = connection.channel()
+class ProducerProductToOrderService:
+    def __init__(self):
+        self.connection = pika.BlockingConnection(pika.ConnectionParameters("localhost"))
+        self.channel = self.connection.channel()
+        self.channel.queue_declare(queue="GET_PRODUCT", durable=True)
 
-# Creating a queue
-channel.queue_declare(queue="TEMP_NAME")
+    def send_product_object(self, product: Product):
+        data = {
+            "product": product
+        }
+        message_body = json.dumps(data)
+        message_bytes = message_body.encode()
 
-# Close the connection
-connection.close()
+        self.channel.basic_publish(
+            exchange='',
+            routing_key="GET_PRODUCT",
+            body=message_bytes,
+            properties=pika.BasicProperties(
+                delivery_mode=pika.DeliveryMode.Persistent
+            )
+        )
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self):
+        self.connection.close()
+
