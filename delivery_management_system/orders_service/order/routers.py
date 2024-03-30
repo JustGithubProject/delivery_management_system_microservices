@@ -1,3 +1,5 @@
+import logging
+
 from fastapi import (
     APIRouter,
     Depends
@@ -31,6 +33,12 @@ from orders_service.repository.order_repository import (
     order_item_repository
 )
 
+
+# Setting up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+
 # Router for Order model
 order_router = APIRouter()
 
@@ -42,6 +50,7 @@ def order_create_handler(data: OrderCreate, user: SystemUser = Depends(get_curre
         with ProducerOrderToDeliveryService() as producer_order:
             producer_order.send_order_object(order)
     except OrderCreateException as exception:
+        logger.error(f"Order create error: {exception}")
         return exception
 
 
@@ -50,11 +59,12 @@ def order_list_handler(user: SystemUser = Depends(get_current_user)):
     return order_repository.get_list_of_user_orders(user)
 
 
-@order_router.delete("/order/delete/")
+@order_router.delete("/order/delete/{order_id}")
 def delete_order_handler(order_id: str, user: SystemUser = Depends(get_current_user)):
     try:
         order_repository.delete_order(order_id=order_id, user_id=user.id)
     except OrderDeleteException as exception:
+        logger.error(f"Order delete error: {exception}")
         return exception
 
 ######################################################################
@@ -75,6 +85,7 @@ def order_item_create_handler(data: OrderItemCreate, user: SystemUser = Depends(
                 quantity=data.quantity
             )
     except OrderItemCreateException as exception:
+        logger.error(f"Order item create error: {exception}")
         return exception
 
 
@@ -86,7 +97,7 @@ def order_item_delete_handler(order_item_id: str, user: SystemUser = Depends(get
             user=user
         )
     except OrderItemDeleteException as exception:
+        logger.error(f"Order item delete error: {exception}")
         return exception
-
 
 
