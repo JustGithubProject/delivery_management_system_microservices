@@ -1,3 +1,5 @@
+import logging
+
 from fastapi import (
     Depends,
     APIRouter
@@ -28,6 +30,14 @@ from delivery_service.delivery.custom_exceptions import (
     DeliveryOrderCreateException
 )
 
+
+# Setting up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+
+
+# Router for DeliveryOrder model
 delivery_router = APIRouter()
 
 
@@ -45,6 +55,7 @@ def create_delivery_order_handler(
                 delivery_address=delivery_order.delivery_address
             )
     except DeliveryOrderCreateException as exception:
+        logger.error(f"Delivery order create error: {exception}")
         return exception
 
 
