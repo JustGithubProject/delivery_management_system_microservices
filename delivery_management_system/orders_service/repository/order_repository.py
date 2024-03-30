@@ -68,6 +68,15 @@ class OrderItemRepository:
         except Exception:
             raise OrderItemCreateException()
 
+    def get_list_of_order_items(self, order, user):
+        if user.id == order.user_id:
+            order_items = self.session.query(OrderItem).filter_by(order_id=order.id).all()
+            return order_items
+        else:
+            return []
+
+
+
 
 order_repository = OrderRepository()
 order_item_repository = OrderItemRepository()
