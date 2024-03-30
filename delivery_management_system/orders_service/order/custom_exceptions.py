@@ -14,3 +14,10 @@ class OrderItemCreateException(Exception):
     def __init__(self, message="Failed to create order item"):
         self.message = message
         super().__init__(self.message)
+
+
+class OrderItemDeleteException(Exception):
+    def __init__(self, message="Failed to delete order item"):
+        self.message = message
+        super().__init__(self.message)
+

@@ -8,7 +8,8 @@ from orders_service.database.database import Session
 from orders_service.order.custom_exceptions import (
     OrderCreateException,
     OrderDeleteException,
-    OrderItemCreateException
+    OrderItemCreateException,
+    OrderItemDeleteException
 )
 
 
@@ -75,7 +76,17 @@ class OrderItemRepository:
         else:
             return []
 
+    def get_order_item_by_id(self, order_item_id):
+        order_item = self.session.query(OrderItem).filter_by(id=order_item_id).first()
+        return order_item
 
+    def delete_order_item(self, order_item_id, user):
+        try:
+            order_item = self.get_order_item_by_id(order_item_id)
+            if order_item.order.user_id == user.id:
+                self.session.delete(order_item)
+        except Exception:
+            raise OrderItemDeleteException()
 
 
 order_repository = OrderRepository()
