@@ -21,9 +21,9 @@ from orders_service.messaging.producer import (
 from orders_service.order.custom_exceptions import (
     OrderCreateException,
     OrderDeleteException,
-    OrderItemCreateException
+    OrderItemCreateException,
+    OrderItemDeleteException
 )
-
 from orders_service.order.utils import get_current_user
 
 from orders_service.repository.order_repository import (
@@ -77,6 +77,16 @@ def order_item_create_handler(data: OrderItemCreate, user: SystemUser = Depends(
     except OrderItemCreateException as exception:
         return exception
 
+
+@order_item_router.delete("/order-item/delete/{order_item_id}")
+def order_item_delete_handler(order_item_id: str, user: SystemUser = Depends(get_current_user)):
+    try:
+        order_item_repository.delete_order_item(
+            order_item_id=order_item_id,
+            user=user
+        )
+    except OrderItemDeleteException as exception:
+        return exception
 
 
 
