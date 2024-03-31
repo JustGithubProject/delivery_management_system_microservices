@@ -82,21 +82,28 @@ def order_item_create_handler(data: OrderItemCreate, user: SystemUser = Depends(
     try:
         with ConsumerProductFromWarehouseService() as consumer_product:
             product_obj = consumer_product.receive_product_object_from_warehouse_service()
-            order_item_repository.create_order_item(
-                order_id=data.order_id,
-                product_id=product_obj.id,
-                quantity=data.quantity
-            )
+            if user:
+                order_item_repository.create_order_item(
+                    order_id=data.order_id,
+                    product_id=product_obj.id,
+                    quantity=data.quantity
+                )
     except OrderItemCreateException as exception:
         logger.error(f"Order item create error: {exception}")
         return exception
 
 
 @order_item_router.get("/order-items/get/{order_id}")
-def order_items_of_current_user_handler(order_id, user: SystemUser = Depends(get_current_user)):
+def list_order_items_of_current_user_handler(order_id, user: SystemUser = Depends(get_current_user)):
     order = order_repository.get_order_by_id(order_id, user.id)
     order_items = order_item_repository.get_list_of_order_items(order=order, user=user)
     return order_items
+
+
+@order_item_router.get("/order-item/get/{order_item_id}")
+def order_item_handler(order_item_id):
+    order_item = order_item_repository.get_order_item_by_id(order_item_id)
+    return order_item
 
 
 @order_item_router.delete("/order-item/delete/{order_item_id}")
