@@ -28,7 +28,7 @@ from warehouses_service.warehouse.utils import get_current_user
 # Logger setup
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s'
+    format='%(filename)s:%(lineno)s - %(asctime)s - %(levelname)s - %(message)s'
 )
 
 # Use a logger for this module

@@ -35,7 +35,10 @@ from orders_service.repository.order_repository import (
 
 
 # Setting up logging
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(filename)s:%(lineno)s - %(asctime)s - %(levelname)s - %(message)s'
+)
 logger = logging.getLogger(__name__)
 
 

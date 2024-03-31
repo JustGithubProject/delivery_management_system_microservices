@@ -39,7 +39,7 @@ from authentication_service.auth.custom_exceptions import (
 # Logger setup
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s'
+    format='%(filename)s:%(lineno)s - %(asctime)s - %(levelname)s - %(message)s'
 )
 
 # Use a logger for this module
