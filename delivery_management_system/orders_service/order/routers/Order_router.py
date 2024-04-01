@@ -55,3 +55,9 @@ def delete_order_handler(order_id: str, user: SystemUser = Depends(get_current_u
 @order_router.get("/order/list-of-user-orders/")
 def order_list_handler(user: SystemUser = Depends(get_current_user)):
     return OrderService.get_user_orders(user)
+
+
+@order_router.get("/order-user/{order_id}")
+def order_by_id_handler(order_id: str, user: SystemUser = Depends(get_current_user)):
+    return OrderService.get_user_order(order_id, user)
+

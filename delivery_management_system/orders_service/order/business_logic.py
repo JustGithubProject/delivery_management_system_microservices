@@ -38,6 +38,10 @@ class OrderService:
     def get_user_orders(user: SystemUser):
         return order_repository.get_list_of_user_orders(user)
 
+    @staticmethod
+    def get_user_order(order_id: str, user: SystemUser):
+        return order_repository.get_order_by_id(order_id, user)
+
 
 class DeliveryService:
     @staticmethod

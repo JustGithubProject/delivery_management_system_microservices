@@ -11,6 +11,7 @@ from orders_service.order.custom_exceptions import (
     OrderItemCreateException,
     OrderItemDeleteException
 )
+from orders_service.order.schemas import SystemUser
 
 
 class OrderRepository:
@@ -35,8 +36,8 @@ class OrderRepository:
         orders = self.session.query(Order).filter_by(user_id=user.id).all()
         return orders
 
-    def get_order_by_id(self, order_id: str, user_id: str):
-        order = self.session.query(Order).filter_by(id=order_id, user_id=user_id).first()
+    def get_order_by_id(self, order_id: str, user: SystemUser):
+        order = self.session.query(Order).filter_by(id=order_id, user_id=user.id).first()
         return order
 
     def delete_order(self, order_id: str, user_id: str):
