@@ -48,15 +48,6 @@ logger = logging.getLogger(__name__)
 
 
 
-
-
-@order_item_router.get("/order-items/get/{order_id}")
-def list_order_items_of_current_user_handler(order_id, user: SystemUser = Depends(get_current_user)):
-    order = order_repository.get_order_by_id(order_id, user.id)
-    order_items = order_item_repository.get_list_of_order_items(order=order, user=user)
-    return order_items
-
-
 @order_item_router.get("/order-item/get/{order_item_id}")
 def order_item_handler(order_item_id):
     order_item = order_item_repository.get_order_item_by_id(order_item_id)

@@ -78,6 +78,10 @@ class OrderItemService:
         except OrderItemCreateException as exception:
             logger.error(f"Order item create error: {exception}")
 
+    @staticmethod
+    def get_order_items(order: Order, user: SystemUser):
+        return order_item_repository.get_list_of_order_items(order=order, user=user)
+
 
 
 
