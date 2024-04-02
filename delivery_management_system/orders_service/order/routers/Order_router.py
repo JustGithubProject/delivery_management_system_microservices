@@ -27,7 +27,7 @@ from orders_service.repository.order_repository import order_repository
 
 from orders_service.order.business_logic import (
     OrderService,
-    DeliveryService
+    OrderDeliveryService
 )
 
 
@@ -42,7 +42,7 @@ order_router = APIRouter()
 @order_router.post("/order/create/")
 def order_create_handler(data: OrderCreate, user: SystemUser = Depends(get_current_user)):
     order = OrderService.create_order(data, user)
-    DeliveryService.send_order_to_delivery(order)
+    OrderDeliveryService.send_order_to_delivery(order)
     return {"message": "Order created successfully and sent to delivery"}
 
 
