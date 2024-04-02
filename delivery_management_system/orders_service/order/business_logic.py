@@ -5,7 +5,8 @@ from orders_service.messaging.producer import ProducerOrderToDeliveryService
 from orders_service.order.custom_exceptions import (
     OrderCreateException,
     OrderDeleteException,
-    OrderItemCreateException
+    OrderItemCreateException,
+    OrderItemDeleteException
 )
 from orders_service.order.models import Order
 from orders_service.order.schemas import (
@@ -81,6 +82,21 @@ class OrderItemService:
     @staticmethod
     def get_order_items(order: Order, user: SystemUser):
         return order_item_repository.get_list_of_order_items(order=order, user=user)
+
+    @staticmethod
+    def get_order_item(order_item_id: str):
+        return order_item_repository.get_order_item_by_id(order_item_id)
+
+
+    @staticmethod
+    def delete_order_item(order_item_id: str, user: SystemUser):
+        try:
+            order_item_repository.delete_order_item(
+                order_item_id=order_item_id,
+                user=user
+            )
+        except OrderItemDeleteException as exception:
+            logger.error(f"Order item delete error: {exception}")
 
 
 
