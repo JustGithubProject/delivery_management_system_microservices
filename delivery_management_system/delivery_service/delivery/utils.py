@@ -1,5 +1,7 @@
 import uuid
 
+from enum import Enum, unique
+
 from datetime import (
     datetime
 )
@@ -16,25 +18,26 @@ from jose import (
 )
 from pydantic import ValidationError
 
-from ..delivery.schemas import (
+from delivery.schemas import (
     SystemUser,
     TokenPayload
 )
 
-from ..delivery.constants import(
+from delivery.constants import(
     ALGORITHM
 )
 
-from ..messaging.consumer import (
+from messaging.consumer import (
     ConsumerAuthorization
 )
 
-from ..config import (
+from config import (
     JWT_SECRET_KEY
 )
 
 
-class StatusDelivery:
+@unique
+class StatusDelivery(Enum):
     NEW = "new"
     IN_PROGRESS = "in_progress"
     COMPLETED = "completed"

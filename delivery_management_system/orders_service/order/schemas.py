@@ -1,7 +1,14 @@
+import enum
 from typing import Optional
 
 from pydantic import BaseModel
-from ..order.utils import StatusOrder
+
+
+class StatusOrder(enum.Enum):
+    NEW = "new"
+    IN_PROGRESS = "in_progress"
+    COMPLETED = "completed"
+    CANCELED = "canceled"
 
 
 class OrderCreate(BaseModel):

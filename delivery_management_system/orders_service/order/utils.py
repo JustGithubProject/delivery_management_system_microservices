@@ -21,29 +21,23 @@ from pydantic import (
     ValidationError
 )
 
-from ..messaging.consumer import (
+from messaging.consumer import (
     ConsumerAuthorization,
 )
 
-from ..order.constants import (
+from order.constants import (
     ALGORITHM
 )
 
-from ..config import (
+from config import (
     JWT_SECRET_KEY,
     JWT_REFRESH_SECRET_KEY
 )
-from ..order.schemas import (
+from order.schemas import (
     TokenPayload,
     SystemUser
 )
 
-
-class StatusOrder(enum.Enum):
-    NEW = "new"
-    IN_PROGRESS = "in_progress"
-    COMPLETED = "completed"
-    CANCELED = "canceled"
 
 
 def generate_uuid():

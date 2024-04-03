@@ -20,10 +20,10 @@ from sqlalchemy.orm import (
 )
 
 from order.utils import (
-    StatusOrder,
     generate_uuid
 )
 
+from order.schemas import StatusOrder
 
 class Base(DeclarativeBase):
     pass

@@ -16,7 +16,7 @@ from warehouse.schemas import (
     TokenPayload
 )
 
-from ..config import (
+from config import (
     JWT_SECRET_KEY,
     JWT_REFRESH_SECRET_KEY
 )
