@@ -7,22 +7,22 @@ from fastapi import (
     status
 )
 
-from warehouses_service.warehouse.custom_exceptions import (
+from ..warehouse.custom_exceptions import (
     DeleteWareHouseException,
     CreateWarehouseException
 )
 
-from warehouses_service.warehouse.schemas import (
+from ..warehouse.schemas import (
     WareHouseCreate,
     WareHouseRead,
     SystemUser
 )
 
-from warehouses_service.repository.warehouse_repository import (
+from ..repository.warehouse_repository import (
     warehouse_repository
 )
 
-from warehouses_service.warehouse.utils import get_current_user
+from ..warehouse.utils import get_current_user
 
 
 # Logger setup

@@ -5,6 +5,7 @@ RUN apt-get update \
         libpq-dev \
     && rm -rf /var/lib/apt/lists/*
 
+RUN mkdir /warehouse_app
 WORKDIR /warehouse_app
 
 COPY . .

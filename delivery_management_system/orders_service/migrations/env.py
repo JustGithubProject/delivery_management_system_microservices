@@ -5,7 +5,7 @@ from sqlalchemy import pool
 
 from alembic import context
 
-from orders_service.config import (
+from ..config import (
     ORDER_DB_USER,
     ORDER_DB_PASS,
     ORDER_DB_HOST,

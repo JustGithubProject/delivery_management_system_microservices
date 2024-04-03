@@ -5,6 +5,7 @@ RUN apt-get update \
         libpq-dev \
     && rm -rf /var/lib/apt/lists/*
 
+RUN mkdir /order_app
 WORKDIR /order_app
 
 COPY . .

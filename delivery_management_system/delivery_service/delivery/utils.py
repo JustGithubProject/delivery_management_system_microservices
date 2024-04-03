@@ -16,20 +16,20 @@ from jose import (
 )
 from pydantic import ValidationError
 
-from delivery_service.delivery.schemas import (
+from ..delivery.schemas import (
     SystemUser,
     TokenPayload
 )
 
-from delivery_service.delivery.constants import(
+from ..delivery.constants import(
     ALGORITHM
 )
 
-from delivery_service.messaging.consumer import (
+from ..messaging.consumer import (
     ConsumerAuthorization
 )
 
-from delivery_service.config import (
+from ..config import (
     JWT_SECRET_KEY
 )
 

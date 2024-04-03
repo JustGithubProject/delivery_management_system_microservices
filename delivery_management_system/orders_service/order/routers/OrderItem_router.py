@@ -5,14 +5,14 @@ from fastapi import (
     Depends
 )
 
-from orders_service.order.schemas import (
+from ...order.schemas import (
     OrderItemCreate,
     SystemUser
 )
 
-from orders_service.order.utils import get_current_user
+from ...order.utils import get_current_user
 
-from orders_service.order.business_logic import (
+from ...order.business_logic import (
     OrderItemService,
     OrderService,
     ProductFromWarehouseService

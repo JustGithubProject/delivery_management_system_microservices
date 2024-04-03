@@ -13,25 +13,25 @@ from fastapi.security import (
 
 from fastapi.responses import RedirectResponse
 
-from authentication_service.auth.utils import (
+from ..auth.utils import (
     get_hashed_password,
     create_access_token,
     create_refresh_token,
     verify_password
 )
 
-from authentication_service.auth.schemas import (
+from ..auth.schemas import (
     UserOut,
     UserAuth
 )
 
-from authentication_service.repository.user_repository import user_repository
+from ..repository.user_repository import user_repository
 
-from authentication_service.messaging.producer import (
+from ..messaging.producer import (
     ProducerAuthorization
 )
 
-from authentication_service.auth.custom_exceptions import (
+from ..auth.custom_exceptions import (
     UserCreateException
 )
 

@@ -1,7 +1,7 @@
 from typing import Optional
 
 from pydantic import BaseModel
-from orders_service.order.utils import StatusOrder
+from ..order.utils import StatusOrder
 
 
 class OrderCreate(BaseModel):

@@ -9,17 +9,17 @@ from sqlalchemy import (
     String,
     Integer,
     ForeignKey,
-    relationship,
     DateTime
 )
 from sqlalchemy.orm import (
     Mapped,
     DeclarativeBase,
     mapped_column,
+    relationship,
 
 )
 
-from orders_service.order.utils import (
+from order.utils import (
     StatusOrder,
     generate_uuid
 )

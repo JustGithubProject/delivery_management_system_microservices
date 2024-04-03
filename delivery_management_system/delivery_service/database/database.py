@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from delivery_service.config import (
+from ..config import (
     DELIVERY_DB_USER,
     DELIVERY_DB_PASS,
     DELIVERY_DB_NAME,

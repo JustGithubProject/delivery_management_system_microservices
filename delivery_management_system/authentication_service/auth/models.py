@@ -9,17 +9,17 @@ from sqlalchemy import (
     String,
     Integer,
     ForeignKey,
-    relationship,
     DateTime
 )
 from sqlalchemy.orm import (
     Mapped,
     DeclarativeBase,
     mapped_column,
+    relationship
 
 )
 
-from authentication_service.auth.utils import (
+from auth.utils import (
     get_default_expires_at,
     generate_uuid
 )

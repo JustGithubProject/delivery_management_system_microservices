@@ -1,7 +1,7 @@
 import pika
 import json
 
-from warehouses_service.warehouse.models import (
+from ..warehouse.models import (
     Product
 )
 

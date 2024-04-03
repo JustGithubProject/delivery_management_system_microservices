@@ -5,17 +5,17 @@ from sqlalchemy import (
     String,
     Integer,
     ForeignKey,
-    relationship,
     DateTime
 )
 from sqlalchemy.orm import (
     Mapped,
     DeclarativeBase,
     mapped_column,
+    relationship
 
 )
 
-from delivery_service.delivery.utils import (
+from delivery.utils import (
     StatusDelivery,
     generate_uuid
 )

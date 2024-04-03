@@ -21,19 +21,19 @@ from pydantic import (
     ValidationError
 )
 
-from orders_service.messaging.consumer import (
+from ..messaging.consumer import (
     ConsumerAuthorization,
 )
 
-from orders_service.order.constants import (
+from ..order.constants import (
     ALGORITHM
 )
 
-from orders_service.config import (
+from ..config import (
     JWT_SECRET_KEY,
     JWT_REFRESH_SECRET_KEY
 )
-from orders_service.order.schemas import (
+from ..order.schemas import (
     TokenPayload,
     SystemUser
 )

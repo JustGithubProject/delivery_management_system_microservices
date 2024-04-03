@@ -1,22 +1,22 @@
 import logging
 
-from orders_service.messaging.consumer import ConsumerProductFromWarehouseService
-from orders_service.messaging.producer import ProducerOrderToDeliveryService
-from orders_service.order.custom_exceptions import (
+from ..messaging.consumer import ConsumerProductFromWarehouseService
+from ..messaging.producer import ProducerOrderToDeliveryService
+from ..order.custom_exceptions import (
     OrderCreateException,
     OrderDeleteException,
     OrderItemCreateException,
     OrderItemDeleteException
 )
-from orders_service.order.models import Order
-from orders_service.order.schemas import (
+from ..order.models import Order
+from ..order.schemas import (
     OrderCreate,
     SystemUser,
     OrderItemCreate,
 
 )
 
-from orders_service.repository.order_repository import (
+from ..repository.order_repository import (
     order_repository,
     order_item_repository
 )

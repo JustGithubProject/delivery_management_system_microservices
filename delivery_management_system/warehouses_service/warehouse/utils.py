@@ -11,21 +11,21 @@ from fastapi.security import OAuth2PasswordBearer
 from jose import jwt
 from pydantic import ValidationError
 
-from warehouses_service.warehouse.schemas import (
+from warehouse.schemas import (
     SystemUser,
     TokenPayload
 )
 
-from warehouses_service.config import (
+from ..config import (
     JWT_SECRET_KEY,
     JWT_REFRESH_SECRET_KEY
 )
 
-from warehouses_service.warehouse.constants import (
+from warehouse.constants import (
     ALGORITHM
 )
 
-from warehouses_service.messaging.consumer import ConsumerAuthorization
+from messaging.consumer import ConsumerAuthorization
 
 
 def generate_uuid():

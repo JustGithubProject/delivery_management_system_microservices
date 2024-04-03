@@ -5,28 +5,28 @@ from fastapi import (
     APIRouter
 )
 
-from delivery_service.messaging.consumer import (
+from ..messaging.consumer import (
     ConsumerAuthorization,
     ConsumerFromOrderService
 )
 
-from delivery_service.delivery.schemas import (
+from ..delivery.schemas import (
     SystemUser
 )
 
-from delivery_service.delivery.utils import (
+from ..delivery.utils import (
     get_current_user
 )
 
-from delivery_service.repository.deliver_order_repository import (
+from ..repository.deliver_order_repository import (
     delivery_order_repository
 )
 
-from delivery_service.delivery.schemas import (
+from ..delivery.schemas import (
     DeliveryOrderCreate
 )
 
-from delivery_service.delivery.custom_exceptions import (
+from ..delivery.custom_exceptions import (
     DeliveryOrderCreateException
 )
 

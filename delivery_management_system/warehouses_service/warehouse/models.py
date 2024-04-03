@@ -5,17 +5,16 @@ from sqlalchemy import (
     Integer,
     Numeric,
     ForeignKey,
-    relationship,
     DateTime
 )
 from sqlalchemy.orm import (
     Mapped,
     DeclarativeBase,
     mapped_column,
-
+    relationship
 )
 
-from warehouses_service.warehouse.utils import (
+from warehouse.utils import (
     generate_uuid
 )
 

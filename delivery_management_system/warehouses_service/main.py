@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from warehouses_service.warehouse.routers import warehouse_router
+from warehouse.routers import warehouse_router
 
 
 warehouse_app = FastAPI()

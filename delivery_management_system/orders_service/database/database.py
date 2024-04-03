@@ -3,7 +3,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import sessionmaker
 
-from orders_service.config import (
+from ..config import (
     ORDER_DB_HOST,
     ORDER_DB_USER,
     ORDER_DB_PASS,

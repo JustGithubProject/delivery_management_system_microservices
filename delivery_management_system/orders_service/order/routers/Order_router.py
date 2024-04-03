@@ -5,27 +5,16 @@ from fastapi import (
     Depends
 )
 
-from orders_service.order.schemas import (
+from ...order.schemas import (
     OrderCreate,
-    SystemUser,
-    OrderItemCreate
+    SystemUser
 )
 
-from orders_service.order.custom_exceptions import (
-    OrderCreateException,
-    OrderDeleteException,
-    OrderItemCreateException,
-    OrderItemDeleteException
-)
 
-from orders_service.messaging.producer import (
-    ProducerOrderToDeliveryService
-)
+from ...order.utils import get_current_user
 
-from orders_service.order.utils import get_current_user
-from orders_service.repository.order_repository import order_repository
 
-from orders_service.order.business_logic import (
+from ...order.business_logic import (
     OrderService,
     OrderDeliveryService
 )
