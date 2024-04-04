@@ -51,24 +51,37 @@ services:
     ports:
       - "5431:5432"
     env_file: ./authentication_service/.env_db
+    volumes:
+      - ./authentication_service/run_migrations.sh:/run_migrations.sh
+    command: ["sh", "/run_migrations.sh"]
+
 
   orders_database:
     image: postgres:latest
     ports:
       - "5432:5432"
     env_file: ./orders_service/.env_db
+    volumes:
+      - ./orders_service/run_migrations.sh:/run_migrations.sh
+    command: ["sh", "/run_migrations.sh"]
 
   warehouses_database:
     image: postgres:latest
     ports:
       - "5433:5432"
     env_file: ./warehouses_service/.env_db
+    volumes:
+      - ./warehouses_service/run_migrations.sh:/run_migrations.sh
+    command: ["sh", "/run_migrations.sh"]
 
   delivery_database:
     image: postgres:latest
     ports:
       - "5434:5432"
     env_file: ./delivery_service/.env_db
+    volumes:
+      - ./delivery_service/run_migrations.sh:/run_migrations.sh
+    command: ["sh", "/run_migrations.sh"]
 
   nginx:
     image: nginx:latest

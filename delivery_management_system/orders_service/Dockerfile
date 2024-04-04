@@ -12,7 +12,6 @@ COPY . .
 
 RUN pip install -r requirements.txt
 
-RUN python3 setup_database.py
 
 EXPOSE 8002
 

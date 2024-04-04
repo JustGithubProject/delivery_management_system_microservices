@@ -13,9 +13,6 @@ COPY . .
 RUN pip install -r requirements.txt
 
 
-RUN python3 setup_database.py
-
-
 EXPOSE 8004
 
 CMD ["uvicorn", "main:delivery_app", "--host", "0.0.0.0", "--port", "8004", "--reload"]
