@@ -1,6 +1,9 @@
 #!/bin/bash
 
-cd /order_app
+ls -l
+
+pip install alembic
+
 
 alembic revision -m "init"
 

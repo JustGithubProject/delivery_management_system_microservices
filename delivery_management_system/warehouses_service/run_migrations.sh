@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd /authentication_service
+pip install alembic
 
 alembic revision -m "init"
 

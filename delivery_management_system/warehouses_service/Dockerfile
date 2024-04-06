@@ -14,6 +14,10 @@ RUN pip install -r requirements.txt
 
 
 
+
 EXPOSE 8003
 
-CMD ["uvicorn", "main:warehouse_app", "--host", "0.0.0.0", "--port", "8003", "--reload"]
+RUN chmod +x run_migrations.sh
+
+CMD ["sh", "-c", "./run_migrations.sh && uvicorn main:warehouse_app --host 0.0.0.0 --port 8003 --reload"]
+

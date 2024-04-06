@@ -15,5 +15,7 @@ RUN pip install -r requirements.txt
 
 EXPOSE 8001
 
+RUN chmod +x run_migrations.sh
 
-CMD ["uvicorn", "main:authentication_app", "--host", "0.0.0.0", "--port", "8001", "--reload"]
+
+CMD ["sh", "-c", "./run_migrations.sh && uvicorn main:authentication_app --host 0.0.0.0 --port 8001 --reload"]

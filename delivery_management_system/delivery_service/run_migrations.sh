@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd /delivery_app
+pip install alembic
 
 alembic revision -m "init"
 
