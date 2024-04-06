@@ -5,9 +5,9 @@ from sqlalchemy import pool
 
 from alembic import context
 
-from ..auth.models import Base
+from auth.models import Base
 
-from ..config import (
+from config import (
     AUTH_DB_USER,
     AUTH_DB_PASS,
     AUTH_DB_HOST,

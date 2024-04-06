@@ -5,9 +5,9 @@ from sqlalchemy import pool
 
 from alembic import context
 
-from delivery_service.delivery.models import Base
+from delivery.models import Base
 
-from delivery_service.config import (
+from config import (
     DELIVERY_DB_USER,
     DELIVERY_DB_PASS,
     DELIVERY_DB_NAME,

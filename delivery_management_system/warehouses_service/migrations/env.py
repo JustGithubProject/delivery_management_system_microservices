@@ -5,7 +5,7 @@ from sqlalchemy import pool
 
 from alembic import context
 
-from ..config import (
+from config import (
     WAREHOUSE_DB_USER,
     WAREHOUSE_DB_PASS,
     WAREHOUSE_DB_HOST,
