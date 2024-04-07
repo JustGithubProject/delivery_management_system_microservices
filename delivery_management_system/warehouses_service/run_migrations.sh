@@ -1,7 +1,4 @@
 #!/bin/bash
 
-pip install alembic
-
-alembic revision -m "init"
-
+echo "Running alembic upgrade head"
 alembic upgrade head
