@@ -1,13 +1,6 @@
 version: '3.8'
 
 services:
-  wait-for-services:
-    build: .
-    depends_on:
-      - authentication_database
-      - orders_database
-      - warehouses_database
-      - delivery_database
   rabbitmq:
     image: "rabbitmq:3-management"
     ports:
