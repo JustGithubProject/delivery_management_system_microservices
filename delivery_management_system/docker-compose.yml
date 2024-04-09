@@ -19,19 +19,19 @@ services:
     ports:
       - "8001:8001"
     depends_on:
-      - authentication_database
+      authentication_database:
+        condition: service_healthy
     env_file: ./authentication_service/.env
     volumes:
       - ./authentication_service:/auth_app
-
-
 
   orders_service:
     build: ./orders_service
     ports:
       - "8002:8002"
     depends_on:
-      - orders_database
+      orders_database:
+        condition: service_healthy
     env_file: ./orders_service/.env
     volumes:
       - ./orders_service:/order_app
@@ -42,7 +42,8 @@ services:
     ports:
       - "8003:8003"
     depends_on:
-      - warehouses_database
+      warehouses_database:
+        condition: service_healthy
     env_file: ./warehouses_service/.env
     volumes:
       - ./warehouses_service:/warehouse_app
@@ -53,7 +54,8 @@ services:
     ports:
       - "8004:8004"
     depends_on:
-      - delivery_database
+      delivery_database:
+        condition: service_healthy
     env_file: ./delivery_service/.env
     volumes:
       - ./delivery_service:/delivery_app
@@ -64,6 +66,11 @@ services:
     ports:
       - "5431:5432"
     env_file: ./authentication_service/.env_db
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 
   orders_database:
@@ -71,12 +78,22 @@ services:
     ports:
       - "5432:5432"
     env_file: ./orders_service/.env_db
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   warehouses_database:
     image: postgres:latest
     ports:
       - "5433:5432"
     env_file: ./warehouses_service/.env_db
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 
   delivery_database:
@@ -84,6 +101,11 @@ services:
     ports:
       - "5434:5432"
     env_file: ./delivery_service/.env_db
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 
   nginx:
