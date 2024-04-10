@@ -19,5 +19,5 @@ RUN chmod +x run_migrations.sh
 RUN chmod +x wait-for-it.sh
 
 
-CMD ["sh", "-c", "./wait-for-it.sh localhost:5434 -- ./run_migrations.sh && uvicorn main:delivery_app --host 0.0.0.0 --port 8004 --reload"]
 
+CMD ["sh", "-c", "./run_migrations.sh && uvicorn main:delivery_app --host 0.0.0.0 --port 8004 --reload"]
