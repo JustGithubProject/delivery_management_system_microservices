@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from delivery_service.delivery.routers import delivery_router
+from delivery.routers import delivery_router
 
 
 delivery_app = FastAPI()

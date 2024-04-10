@@ -16,7 +16,7 @@ from order.schemas import (
 
 )
 
-from ..repository.order_repository import (
+from repository.order_repository import (
     order_repository,
     order_item_repository
 )
