@@ -1,6 +1,6 @@
-from ..database.database import Session
-from ..warehouse.models import WareHouse
-from ..warehouse.custom_exceptions import (
+from database.database import Session
+from warehouse.models import WareHouse
+from warehouse.custom_exceptions import (
     DeleteWareHouseException,
     CreateWarehouseException
 )

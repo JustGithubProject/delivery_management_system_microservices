@@ -1,7 +1,7 @@
 import pika
 import json
 
-from ..order.models import (
+from order.models import (
     Order
 )
 

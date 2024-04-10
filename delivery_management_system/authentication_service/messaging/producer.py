@@ -1,6 +1,6 @@
 import json
 import pika
-from ..auth.models import User
+from auth.models import User
 
 
 class ProducerAuthorization:

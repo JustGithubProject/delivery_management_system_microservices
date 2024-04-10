@@ -1,17 +1,17 @@
-from ..order.models import (
+from order.models import (
     Order,
     OrderItem
 )
 
-from ..database.database import Session
+from database.database import Session
 
-from ..order.custom_exceptions import (
+from order.custom_exceptions import (
     OrderCreateException,
     OrderDeleteException,
     OrderItemCreateException,
     OrderItemDeleteException
 )
-from ..order.schemas import SystemUser
+from order.schemas import SystemUser
 
 
 class OrderRepository:

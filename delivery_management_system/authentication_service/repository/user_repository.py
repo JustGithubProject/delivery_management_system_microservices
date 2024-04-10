@@ -1,7 +1,7 @@
-from ..auth.models import User
-from ..database.database import Session
-from ..auth.utils import get_hashed_password
-from ..auth.custom_exceptions import (
+from auth.models import User
+from database.database import Session
+from auth.utils import get_hashed_password
+from auth.custom_exceptions import (
     UserCreateException
 )
 

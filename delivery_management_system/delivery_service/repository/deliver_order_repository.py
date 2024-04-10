@@ -1,11 +1,11 @@
-from ..database.database import (
+from database.database import (
     Session
 )
-from ..delivery.custom_exceptions import (
+from delivery.custom_exceptions import (
     DeliveryOrderCreateException
 )
 
-from ..delivery.models import (
+from delivery.models import (
     DeliveryOrder
 )
 
