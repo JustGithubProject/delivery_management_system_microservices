@@ -45,8 +45,9 @@ logging.basicConfig(
 # Use a logger for this module
 logger = logging.getLogger(__name__)
 
-user_router = APIRouter()
-
+user_router = APIRouter(
+    tags=["UserAuth Operations"]
+)
 
 @user_router.post("/auth/signup", summary="Create new user", response_model=UserOut)
 def create_user_handler(data: UserAuth):

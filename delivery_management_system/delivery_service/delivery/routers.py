@@ -40,8 +40,9 @@ logger = logging.getLogger(__name__)
 
 
 # Router for DeliveryOrder model
-delivery_router = APIRouter()
-
+delivery_router = APIRouter(
+    tags=["Delivery Operations"]
+)
 
 @delivery_router.get("/create/delivery")
 def create_delivery_order_handler(

@@ -36,7 +36,9 @@ logger = logging.getLogger(__name__)
 
 
 # Router for warehouse
-warehouse_router = APIRouter()
+warehouse_router = APIRouter(
+    tags=["Warehouse Operations"]
+)
 
 
 @warehouse_router.post("/warehouse/create/")

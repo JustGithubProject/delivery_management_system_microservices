@@ -20,7 +20,9 @@ from order.business_logic import (
 
 
 # Router for OrderItem model
-order_item_router = APIRouter()
+order_item_router = APIRouter(
+    tags=["OrderItem Operations"]
+)
 
 
 @order_item_router.post("/order-item/create/")

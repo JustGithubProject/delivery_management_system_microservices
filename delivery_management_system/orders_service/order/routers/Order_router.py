@@ -21,7 +21,9 @@ from order.business_logic import (
 
 
 # Router for Order model
-order_router = APIRouter()
+order_router = APIRouter(
+    tags=["Order Operations"]
+)
 
 ##############################################################
 # Handlers for Order model that can use only current_user    #
