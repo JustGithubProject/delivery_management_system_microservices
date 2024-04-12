@@ -12,9 +12,10 @@ logging.basicConfig(
     format='%(filename)s:%(lineno)s - %(asctime)s - %(levelname)s - %(message)s'
 )
 
+# An instance of FastAPI (for order service)
 order_app = FastAPI()
 
-# Connecting routers to main fastapi app
+# Attaching routers to order_app
 order_app.include_router(order_router)
 order_app.include_router(order_item_router)
 
