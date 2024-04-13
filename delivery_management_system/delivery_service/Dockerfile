@@ -16,7 +16,6 @@ RUN pip install -r requirements.txt
 EXPOSE 8004
 
 RUN chmod +x run_migrations.sh
-RUN chmod +x wait-for-it.sh
 
 
 
