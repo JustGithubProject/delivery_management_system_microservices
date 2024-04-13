@@ -65,12 +65,16 @@ services:
   authentication_database:
     image: postgres:latest
     env_file: ./authentication_service/.env_db
+    ports:
+      - "65400:5432"
     volumes:
       - postgres_authentication_database:/var/lib/postgresql/data/
 
   orders_database:
     image: postgres:latest
     env_file: ./orders_service/.env_db
+    ports:
+      - "65401:5432"
     volumes:
       - postgres_orders_database:/var/lib/postgresql/data/
 
@@ -78,6 +82,8 @@ services:
   warehouses_database:
     image: postgres:latest
     env_file: ./warehouses_service/.env_db
+    ports:
+      - "65402:5432"
     volumes:
       - postgres_warehouses_database:/var/lib/postgresql/data/
 
@@ -85,6 +91,8 @@ services:
   delivery_database:
     image: postgres:latest
     env_file: ./delivery_service/.env_db
+    ports:
+      - "65403:5432"
     volumes:
       - postgres_delivery_database:/var/lib/postgresql/data/
 
