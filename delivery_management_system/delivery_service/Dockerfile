@@ -15,8 +15,3 @@ RUN pip install -r requirements.txt
 
 EXPOSE 8004
 
-RUN chmod +x run_migrations.sh
-
-
-
-CMD ["sh", "-c", "./run_migrations.sh"]

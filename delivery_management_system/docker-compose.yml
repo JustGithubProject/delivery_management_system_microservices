@@ -16,7 +16,7 @@ services:
 
   authentication_service:
     build: ./authentication_service
-    command: sh -c "./wait-for-it.sh localhost:5432 && ./run_migrations.sh && uvicorn main:authentication_app --host 0.0.0.0 --port 8001 --reload"
+    command: uvicorn main:authentication_app --host 0.0.0.0 --port 8001 --reload
     ports:
       - "8001:8001"
     depends_on:
@@ -27,7 +27,7 @@ services:
 
   orders_service:
     build: ./orders_service
-    command: sh -c "./wait-for-it.sh localhost:5432 && ./run_migrations.sh && uvicorn main:order_app --host 0.0.0.0 --port 8002 --reload"
+    command: uvicorn main:order_app --host 0.0.0.0 --port 8002 --reload
     ports:
       - "8002:8002"
     depends_on:
@@ -39,7 +39,7 @@ services:
 
   warehouses_service:
     build: ./warehouses_service
-    command: sh -c "./wait-for-it.sh localhost:5432 && ./run_migrations.sh && uvicorn main:warehouse_app --host 0.0.0.0 --port 8003 --reload"
+    command: uvicorn main:warehouse_app --host 0.0.0.0 --port 8003 --reload
     ports:
       - "8003:8003"
     depends_on:
@@ -51,7 +51,7 @@ services:
 
   delivery_service:
     build: ./delivery_service
-    command: sh -c "./wait-for-it.sh localhost:5432 && ./run_migrations.sh && uvicorn main:delivery_app --host 0.0.0.0 --port 8004 --reload"
+    command: uvicorn main:delivery_app --host 0.0.0.0 --port 8004 --reload
     ports:
       - "8004:8004"
     depends_on:
