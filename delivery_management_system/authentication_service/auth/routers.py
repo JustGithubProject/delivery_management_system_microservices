@@ -49,9 +49,14 @@ user_router = APIRouter(
     tags=["UserAuth Operations"]
 )
 
-@user_router.post("/auth/signup", summary="Create new user", response_model=UserOut)
+@user_router.post("/auth/signup", summary="Create new user")
 def create_user_handler(data: UserAuth):
-
+    # Check if any field is None
+    if None in data.dict().values():
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="All fields are required"
+        )
     # Get user by email
     user = user_repository.get_user_by_email(data.email)
 
@@ -70,6 +75,7 @@ def create_user_handler(data: UserAuth):
             password=data.password
         )
         logger.info(f"User created successfully: {data.username}")
+        return f"User created successfully: {data.username}"
     except UserCreateException as ex:
         logger.error(f"Failed to create a new user: {ex}", exc_info=True)
         return f"{ex}: failure to create new user"
@@ -114,3 +120,7 @@ def login_handler(form_data: OAuth2PasswordRequestForm = Depends()):
     }
 
 
+
+@user_router.get("/users")
+def get_list_handler():
+    return user_repository.get_list_of_users()

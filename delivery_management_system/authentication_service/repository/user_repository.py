@@ -35,6 +35,10 @@ class UserRepository:
         user = self.session.query(User).filter_by(username=username).first()
         return user
 
+    def get_list_of_users(self):
+        users = self.session.query(User).all()
+        return users
+
 
 user_repository = UserRepository()
 
