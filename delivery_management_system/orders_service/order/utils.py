@@ -1,3 +1,5 @@
+import logging
+
 import enum
 import uuid
 
@@ -72,9 +74,11 @@ def get_current_user(token: str = Depends(reusable_oauth)) -> SystemUser:
             detail="Could not validate credentials",
             headers={"WWW-Authenticate": "Bearer"},
         )
-
-    with ConsumerAuthorization() as consumer_auth:
-        _, user = consumer_auth.receive_user_obj_and_token_from_auth_service()
+    try:
+        with ConsumerAuthorization() as consumer_auth:
+            _, user = consumer_auth.receive_user_obj_and_token_from_auth_service()
+    except Exception as e:
+        logging.error(f"Error while processing with ConsumerAuthorization: {e}")
 
     if user is None:
         raise HTTPException(

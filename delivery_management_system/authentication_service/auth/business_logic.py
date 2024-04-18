@@ -10,7 +10,7 @@ class UserService:
         try:
             user_repository.create_user(
                 username=data.username,
-                emai=data.email,
+                email=data.email,
                 password=data.password
             )
         except UserCreateException as ex:
