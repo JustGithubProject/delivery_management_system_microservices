@@ -15,7 +15,7 @@ class ProducerAuthorization:
             self.channel = self.connection.channel()
             self.channel.queue_declare(queue="GET_TOKEN_AND_USER", durable=True)
         except AMQPConnectionError as e:
-            logging.error(f"Failed to connect to RabbitMQ: {e}")
+            logging.error(f"Failed to connect to RabbitMQ: {e}!!!!!!!")
 
     def send_user_object_and_token_to_services(self, token: str, user: User):
         if self.connection is None:

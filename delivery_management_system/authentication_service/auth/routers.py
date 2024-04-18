@@ -35,6 +35,10 @@ from auth.custom_exceptions import (
     UserCreateException
 )
 
+from auth.business_logic import (
+    UserService
+)
+
 
 # Logger setup
 logging.basicConfig(
@@ -58,7 +62,7 @@ def create_user_handler(data: UserAuth):
             detail="All fields are required"
         )
     # Get user by email
-    user = user_repository.get_user_by_email(data.email)
+    user = UserService.get_user_by_username(data.username)
 
     # If the user exists raise HTTPException
     if user:
@@ -69,11 +73,7 @@ def create_user_handler(data: UserAuth):
         )
     try:
         # Create user using repository for user
-        user_repository.create_user(
-            username=data.username,
-            email=data.email,
-            password=data.password
-        )
+        UserService.register_user(data)
         logger.info(f"User created successfully: {data.username}")
         return f"User created successfully: {data.username}"
     except UserCreateException as ex:
@@ -86,7 +86,7 @@ def login_handler(form_data: OAuth2PasswordRequestForm = Depends()):
     logger.info(f"Login attempt with username: {form_data.username}")
 
     # Get user by username
-    user = user_repository.get_user_by_username(form_data.username)
+    user = UserService.get_user_by_username(form_data.username)
 
     # If the user doesn't exist raise an HTTPException
     if not user:
@@ -123,4 +123,4 @@ def login_handler(form_data: OAuth2PasswordRequestForm = Depends()):
 
 @user_router.get("/users")
 def get_list_handler():
-    return user_repository.get_list_of_users()
+    return UserService.list_users()
