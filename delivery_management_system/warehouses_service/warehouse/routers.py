@@ -23,6 +23,7 @@ from repository.warehouse_repository import (
 )
 
 from warehouse.utils import get_current_user
+from business_logic import WareHouseService
 
 
 # Logger setup
@@ -45,7 +46,7 @@ warehouse_router = APIRouter(
 def create_warehouse_handler(data: WareHouseCreate, user: SystemUser = Depends(get_current_user)):
 
     # Get warehouse by warehouse_id
-    warehouse = warehouse_repository.get_warehouse_by_name(data.name)
+    warehouse = WareHouseService.get_warehouse_by_name(data.name)
 
     # If the warehouse exists raise HTTPException
     if warehouse:
@@ -57,7 +58,7 @@ def create_warehouse_handler(data: WareHouseCreate, user: SystemUser = Depends(g
 
     try:
         # Create warehouse using repository for warehouse
-        warehouse_repository.create_warehouse(
+        WareHouseService.create_warehouse(
             name=data.name,
             location=data.location,
             product_name=data.product_name,
@@ -73,7 +74,7 @@ def create_warehouse_handler(data: WareHouseCreate, user: SystemUser = Depends(g
 def get_warehouse_by_id_handler(warehouse_id: int, user: SystemUser = Depends(get_current_user)):
     try:
         # Get warehouse by id that passed from path parameters
-        warehouse = warehouse_repository.get_warehouse_by_id(warehouse_id)
+        warehouse = WareHouseService.get_warehouse_by_id(warehouse_id)
         logger.info("Operation was successfully completed")
     except Exception as ex:
         logger.error(f"{ex}: the warehouse with this ID could not be found", exc_info=True)
@@ -84,14 +85,14 @@ def get_warehouse_by_id_handler(warehouse_id: int, user: SystemUser = Depends(ge
 
 @warehouse_router.get("/warehouse/list/")
 def get_list_warehouses_handler(user: SystemUser = Depends(get_current_user)):
-    warehouses = warehouse_repository.get_warehouses_list()
+    warehouses = WareHouseService.get_warehouses_list()
     return warehouses
 
 
 @warehouse_router.delete("/warehouse/delete/{warehouse_id}")
 def delete_warehouse_handler(warehouse_id: int, user: SystemUser = Depends(get_current_user)):
     try:
-        warehouse_repository.delete_warehouse(warehouse_id)
+        WareHouseService.delete_warehouse(warehouse_id)
     except DeleteWareHouseException:
         logger.error("Failed to delete warehouse")
         return "Failed to delete warehouse"
