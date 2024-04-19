@@ -30,6 +30,8 @@ from delivery.custom_exceptions import (
     DeliveryOrderCreateException
 )
 
+from business_logic import DeliveryOrderService
+
 
 # Setting up logging
 logging.basicConfig(
@@ -53,7 +55,7 @@ def create_delivery_order_handler(
         order = consumer_order.receive_order_object()
     try:
         if order.user_id == user.id:
-            delivery_order_repository.create_delivery_order(
+            DeliveryOrderService.create_delivery_order(
                 order_id=order.id,
                 delivery_address=delivery_order.delivery_address
             )
@@ -67,7 +69,7 @@ def get_delivery_by_order_handler(user: SystemUser = Depends(get_current_user)):
     with ConsumerFromOrderService() as consumer_order:
         order = consumer_order.receive_order_object()
     if order.user_id == user.id:
-        delivery = delivery_order_repository.get_delivery_by_order(order)
+        delivery = DeliveryOrderService.get_delivery_by_order(order)
         return delivery
     else:
         return []
